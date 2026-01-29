@@ -1,6 +1,7 @@
 #  Network Attached Storage (NAS) Server using Ubuntu (Linux) & Samba
 
 A self-hosted Network Attached Storage (NAS) server built using Linux and Samba on a dedicated laptop system. This project demonstrates secure LAN file sharing, user-based access control, structured storage layout, and production-style NAS configuration.
+---
 Pictures are added below.
 ---
 
