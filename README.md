@@ -1,4 +1,4 @@
-# 🗄️ Network Attached Storage (NAS) Server — Linux + Samba
+#  Network Attached Storage (NAS) Server using Ubuntu (Linux) & Samba
 
 A self-hosted Network Attached Storage (NAS) server built using Linux and Samba on a dedicated laptop system. This project demonstrates secure LAN file sharing, user-based access control, structured storage layout, and production-style NAS configuration.
 
@@ -24,6 +24,65 @@ Total Disk: ~1TB
 System Partition → ~250 GB → OS
 NAS Partition → ~750 GB → Mounted at /srv
 ```
+
+---
+
+# 🧩 Ubuntu Installation Partitioning Steps (Manual Setup)
+
+During Ubuntu installation, choose **“Something else”** when asked about installation type. This allows manual partitioning for NAS-style split storage.
+
+## Step‑by‑Step Partition Plan
+
+Assuming a ~1TB disk:
+
+### 1️⃣ EFI Partition (if UEFI system)
+
+* Size: 512 MB – 1 GB
+* Type: FAT32
+* Mount point: `/boot/efi`
+* Flag: EFI System Partition
+
+### 2️⃣ Root Partition (System)
+
+* Size: ~250 GB
+* Filesystem: ext4
+* Mount point: `/`
+* Purpose: OS + applications
+
+### 3️⃣ Swap Partition
+
+* Size: 4–16 GB (depending on RAM and hibernation needs)
+* Type: swap area
+
+### 4️⃣ NAS Storage Partition
+
+* Size: Remaining space (~750 GB)
+* Filesystem: ext4
+* Mount point: `/srv`
+* Purpose: Dedicated NAS storage volume
+
+---
+
+## Example Layout Table
+
+| Partition | Size    | FS    | Mount     |
+| --------- | ------- | ----- | --------- |
+| EFI       | 512M–1G | FAT32 | /boot/efi |
+| Root      | 250G    | ext4  | /         |
+| Swap      | 8G      | swap  | —         |
+| NAS       | ~750G   | ext4  | /srv      |
+
+---
+
+## Post‑Install Verification
+
+After installation, verify layout using:
+
+```bash
+lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT
+```
+
+You should see a large partition mounted at `/srv`, which will be used for NAS storage.
 
 ---
 
@@ -127,7 +186,16 @@ These commands help verify configuration correctness, service status, and networ
 
 ---
 
-# 📦 Features
+# ScreenShots (Inside Host)
+
+<img width="688" height="529" alt="Screenshot from 2026-01-30 00-06-21" src="https://github.com/user-attachments/assets/f8b3625e-4eb0-46eb-a500-902f3c500c0d" />
+<img width="1662" height="516" alt="Screenshot from 2026-01-30 00-06-51" src="https://github.com/user-attachments/assets/3a19ec40-e81f-4785-87c2-8b819a7c7a96" />
+<img width="1913" height="1077" alt="Screenshot from 2026-01-30 00-07-13" src="https://github.com/user-attachments/assets/5ff40bce-10aa-4e55-9b90-37397e8e8327" />
+<img width="990" height="589" alt="Screenshot from 2026-01-30 00-07-30" src="https://github.com/user-attachments/assets/ca01a47d-4010-47e7-9d31-0eaefff2580c" />
+
+---
+
+# Features
 
 * Structured NAS storage layout
 * Authenticated SMB shares
