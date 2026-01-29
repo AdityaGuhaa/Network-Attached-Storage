@@ -2,6 +2,14 @@
    path = /srv/nas
    browseable = yes
    read only = no
+   create mask = 0664
+   directory mask = 2775
+   valid users = @nasusers
+
+[NAS-PUBLIC]
+   path = /srv/nas/public
+   browseable = yes
+   read only = no
    valid users = @nasusers
    create mask = 0664
    directory mask = 2775
