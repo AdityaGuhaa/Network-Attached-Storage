@@ -139,6 +139,10 @@ sudo mkdir -p /srv/nas/{public,private,media,backups,projects}
 sudo chown -R root:nasusers /srv/nas
 sudo chmod -R 2775 /srv/nas
 
+sudo nano /etc/samba/smb.conf
+#Add [NAS] and [NAS-PUBLIC] to the bottom of the script
+#[NAS] and [NAS-PUBLIC] is available inside config folder of this repo
+
 sudo smbpasswd -a <user>
 sudo smbpasswd -e <user>
 
